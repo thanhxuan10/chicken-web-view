@@ -1,31 +1,25 @@
-import React, {Component} from 'react';
-import {Alert, Button, Modal} from 'reactstrap'
-import BillCard from '../components/BillCard';
-import { ProductContext } from '../../context/ProductContext'
+import React, { Component } from 'react';
+import { Alert, Button, Modal } from 'reactstrap'
+import { BillContext } from '../../context/BillContext'
+import BillComponents from '../components/BillComponents';
 
-class Bill extends Component{
-  render(){
-    return(
+class Bill extends Component {
+  render() {
+    return (
       <div>
-      <h1 className="d-flex justify-content-center">Bill Management</h1>
-    
-     <Alert color="primary">
-        Đơn hàng 1
-        <ProductContext.Consumer>
-          
-            {({ togglebill }) => 
-            (<div className="mt-auto ml-auto">
-            <Button   className="m-1"  onClick = {togglebill}>Xem chi tiết</Button>
-            </div>)}
-          </ProductContext.Consumer>
-          <ProductContext.Consumer>
-            {({ modalbill, togglebill }) => <Modal isOpen={modalbill}>
-              <BillCard exit={togglebill} />
-            </Modal>}
-          </ProductContext.Consumer>
-      </Alert>
+        <h1 className="d-flex justify-content-center">Bill Management</h1>
+        <BillContext.Consumer>
+          {({ items }) => {
+            if (items.length > 0) {
+              return items.map((item, index) => <BillComponents
+                key={index}
+                item={item} />)
+            } else {
+              return <p>Không có sản phẩm nào</p>
+            }
 
-        
+          }}
+        </BillContext.Consumer>
       </div>
     )
   }

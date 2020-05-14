@@ -12,6 +12,7 @@ import Bill from './store/pages/Bill'
 import Login from './store/pages/Login'
 import SignUp from './store/pages/SignUp'
 import Insert from './store/pages/Insert'
+import BillCard from './store/pages/BillCard'
 
 //import pages from user
 import HomeUser from './user/page/Home'
@@ -25,7 +26,9 @@ import { Container } from 'reactstrap';
 
 //import context
 import ProductProvider from './context/ProductContext'
+import BillProvider from './context/BillContext'
 import CartProvider, { CartContext } from './context/CartContext'
+
 import AuthProvider from './context/AuthContext'
 import { AuthContext } from './context/AuthContext'
 import './App.css'
@@ -35,6 +38,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        
         <AuthProvider>
           <AuthContext>
             {({ isLogin, permission }) => {
@@ -44,12 +48,15 @@ class App extends Component {
                 console.log(isLogin)
                 if (permission == 1) {
                   return <ProductProvider>
+                    <BillProvider>
                     <NavFrom />
                     <Container className="bg-white">
                       <Route path="/" exact component={Home} />
                       <Route path="/bill" component={Bill} />
-                      <Route path="/product/insert" component={Insert} />
+                      <Route path="/billcard" component={BillCard} />
+                      <Route path="/product/insert" component={Insert} />         
                     </Container>
+                  </BillProvider>
                   </ProductProvider>
                 } else if (permission == 0) {
                   return <ProductProvider>
