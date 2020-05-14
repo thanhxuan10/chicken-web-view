@@ -20,7 +20,7 @@ export default class extends Component {
             },
             modal: false,
             modal1: false,
-            modal2: true,
+            modal2: false,
             modal3: false,
             modal4: false,
             modalbill: false

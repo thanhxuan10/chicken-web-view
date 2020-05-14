@@ -12,6 +12,7 @@ import Bill from './store/pages/Bill'
 import Login from './store/pages/Login'
 import SignUp from './store/pages/SignUp'
 import Insert from './store/pages/Insert'
+import BillCard from './store/pages/BillCard'
 
 //import pages from user
 import HomeUser from './user/page/Home'
@@ -24,6 +25,7 @@ import { Container } from 'reactstrap';
 
 //import context
 import ProductProvider from './context/ProductContext'
+import BillProvider from './context/BillContext'
 import AuthProvider from './context/AuthContext'
 import { AuthContext } from './context/AuthContext'
 
@@ -45,9 +47,12 @@ class App extends Component {
                       <div>
                         <NavFrom />
                       </div>
+                      <BillProvider>
                       <Route path="/" exact component={Home} />
                       <Route path="/bill" component={Bill} />
+                      <Route path="/billcard" component={BillCard} />
                       <Route path="/product/insert" component={Insert} />
+                      </BillProvider>
                     </ProductProvider>
                   } else if (permission == 0) {
                     return <ProductProvider>
