@@ -1,66 +1,42 @@
 import React, { Component, useState } from 'react';
 import {
-  Modal,
   Row,
   Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
   Button,
-  CardSubtitle
+  Modal,
+  ModalHeader
 } from "reactstrap";
-import { ProductContext } from '../../context/ProductContext'
-import Cart from '../components/Cart'
+import { CartContext } from '../../context/CartContext'
+import CartItem from '../components/CartItem'
+import OrderForm from '../components/OrderForm'
 
 export default class extends React.Component {
-  constructor(props) {
-        super(props)
-
-       this.state = {
-           product: [],
-           modal: true,
-       }
-   
-   }
-  
-   render() {
-    
+  render() {
     return (
-      <div>
-        <h1 className="d-flex justify-content-center">Giỏ hàng</h1>
-          <Col lg="12" className="m-2" >
-            <Card className="d-flex flex-row" style={{ height: "30vh" }}>
-                <div className="d-flex flex-row justify-content-center align-items-center p-4">
-                    <CardImg
-                        top
-                        width="100%"
-                        src={`/n.jpg`}
-                        alt="Card image cap"
-                    />
-                </div>
-                <CardBody className="d-flex flex-column align-items-start">
-                    <CardTitle>Tên sản phẩm: P1</CardTitle>
-                    <CardSubtitle className="text-left">Số lượng: 1</CardSubtitle>
-                    <CardText className="text-left">Nội dung sản phẩm: Demo P1</CardText>
-                    <CardText className="text-left">Giá sản phẩm: 100.000</CardText>
-                    <Button color="danger">Xoá</Button>
-                </CardBody>
-            </Card>
-            <h2 className="text-danger">Tổng tiền tạm tính: 100.000</h2>
-            <ProductContext.Consumer>
-                        {({ toggle2 }) => <Button size="lg" block onClick={toggle2}>Thanh toán</Button>}
-                    </ProductContext.Consumer>
-                    <ProductContext.Consumer>
-                        {({ modal4, toggle2 }) => <Modal isOpen={modal4}>
-                            <Cart exit={toggle2} />
-                        </Modal>}
-                    </ProductContext.Consumer>
-            <Button className="w-100 m-1">Tiếp tục mua sắm</Button>
+      <Col lg="12">
+        <Col lg="12" className="m-1 bg-white">
+          <CartContext.Consumer>
+            {({ count }) => <p className="p-2">Giỏ hàng của bạn ({count} sản phẩm)</p>}
+          </CartContext.Consumer>
         </Col>
-      </div>
-
+        <Row className="m-1 p-0">
+          <Col lg="10" className="border-right">
+            <CartContext.Consumer>
+              {({ products }) => (products.length > 0) ? products.map((Item) => <CartItem Item={Item} />) : <p>Không có sản phẩm nào trong giỏ hàng!</p>}
+            </CartContext.Consumer>
+          </Col>
+          <CartContext.Consumer>
+            {({ total_price, toggle }) => <Col lg="2" className="p-2 bg-white">
+              <p className="border-bottom">CHI TIẾT GIÁ</p>
+              <Col className="mt-auto">
+                <p>Tổng tiền: <strong className="text-danger mt-auto">{total_price}đ</strong></p>
+                <Button color="danger" className="w-100" onClick={toggle}>Đặt mua</Button>
+              </Col>
+            </Col>}
+          </CartContext.Consumer>
+        </Row>
+        <OrderForm />
+      </Col>
     )
   }
 }
