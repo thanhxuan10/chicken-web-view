@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Redirect,
-  } from "react-router-dom";
+} from "react-router-dom";
 import NavBar from '../components/NavBar'
 import { Container } from 'reactstrap';
 import CardForm from '../components/CardForm';
@@ -14,8 +14,8 @@ export default class extends React.Component {
         return (
             <Container>
                 <div>
-            <CardForm />
-          </div>
+                    <CardForm />
+                </div>
             </Container>
         )
     }

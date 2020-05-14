@@ -20,9 +20,7 @@ export default class extends Component {
             },
             modal: false,
             modal1: false,
-            modal2: false,
-            modal3: false,
-            modal4: false,
+            modal2: true,
             modalbill: false
         }
 
@@ -31,13 +29,11 @@ export default class extends Component {
         this.getProduct = this.getProduct.bind(this)
         this.onChange = this.onChange.bind(this)
         this.toggle = this.toggle.bind(this)
-        this.toggle2 = this.toggle2.bind(this)
         this.toggleinsert = this.toggleinsert.bind(this)
         this.insertProduct = this.insertProduct.bind(this)
         this.togglebill = this.togglebill.bind(this)
         this.togglebillupdate = this.togglebillupdate.bind(this)
         this.billProduct = this.billProduct.bind(this)
-        this.togglecart = this.togglecart.bind(this)
     }
 
     componentDidMount() {
@@ -47,22 +43,13 @@ export default class extends Component {
             })
         })
     }
-    togglecart() {
-        this.setState({
-            modal3: !this.state.modal3
-        })
-    }
 
     toggle() {
         this.setState({
             modal: !this.state.modal
         })
     }
-    toggle2() {
-        this.setState({
-            modal4: !this.state.modal4
-        })
-    }
+
     togglebillupdate() {
         this.setState({
             modal2: !this.state.modal2
@@ -166,7 +153,7 @@ export default class extends Component {
     }
 
     render() {
-        const { products, product, modal, modal1, modalbill, modal2, modal3, modal4} = this.state
+        const { products, product, modal, modal1, modalbill, modal2, modal4} = this.state
 
         return <ProductContext.Provider value={{
             products,
@@ -175,10 +162,6 @@ export default class extends Component {
             modal1,
             modalbill,
             modal2,
-            modal3,
-            modal4,
-            toggle2: this.toggle2,
-            togglecart: this.togglecart,
             togglebillupdate: this.togglebillupdate,
             billProduct: this.billProduct,
             togglebill: this.togglebill,

@@ -12,7 +12,8 @@ import {
     Button,
 } from 'reactstrap';
 import { AuthContext } from '../../context/AuthContext'
-import { Redirect } from 'react-router-dom'
+import { CartContext } from '../../context/CartContext'
+import { Link } from 'react-router-dom'
 import CartPage from '../page/CartPage'
 
 class NavFrom extends React.Component {
@@ -36,28 +37,34 @@ class NavFrom extends React.Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <NavbarBrand>User Management</NavbarBrand>
+                    <NavbarBrand>DCD</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <NavItem>
-                                <NavLink href="/">Home</NavLink>
+                                <NavLink>
+                                    <Link to="/">Home</Link>
+                                </NavLink>
                             </NavItem>
 
                         </Nav>
 
                         <Nav>
-                            <NavLink href="/cart">
-                                <img
-                                    src="/commerce.png"
-                                    width="30"
-                                    height="30"
-                                    className="d-inline-block align-top-right"
-                                    alt="React Bootstrap logo"
-                                    href="/cart"
-                                />
-                            </NavLink>
 
+                            <CartContext.Consumer>
+                                {({ count }) => <NavLink>
+                                    <Link to="/cart">
+                                    <img
+                                        src="/commerce.png"
+                                        width="30"
+                                        height="30"
+                                        className="d-inline-block align-top-right"
+                                        alt="React Bootstrap logo"
+                                        href="/cart"
+                                    />({count})
+                                    </Link>
+                                    </NavLink>}
+                            </CartContext.Consumer>
                             <AuthContext.Consumer>
                                 {({ logout }) => <NavLink onClick={logout} >sign out</NavLink>}
                             </AuthContext.Consumer>
