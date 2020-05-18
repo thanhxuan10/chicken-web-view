@@ -65,7 +65,7 @@ class SignUp extends Component {
       <Container>
         <div>
         <div style={{height: "80vh"}} className="d-flex flex-row justify-content-center align-item-center">
-        <Col sm="10" md="6" lg="4" className="m-auto shadow-lg">
+        <Col sm="10" md="6" lg="4" className="m-auto shadow-lg bg-white">
           <h1 className="d-flex justify-content-center" >Sign Up</h1>
           <form onSubmit={this.submitForm}>
             <FormGroup>
@@ -98,6 +98,8 @@ class SignUp extends Component {
           </FormGroup>
             <FormGroup>
             <Button
+            className="w-100"
+            color="primary"
             onClick ={(e) =>
             navigator.geolocation.getCurrentPosition(
               (position) => {

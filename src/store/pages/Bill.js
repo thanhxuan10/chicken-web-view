@@ -6,7 +6,7 @@ import BillComponents from '../components/BillComponents';
 class Bill extends Component {
   render() {
     return (
-      <div>
+      <div >
         <h1 className="d-flex justify-content-center">Bill Management</h1>
         <BillContext.Consumer>
           {({ items }) => {
