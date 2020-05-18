@@ -60,6 +60,7 @@ export default class AuthProvider extends React.Component {
     logout() {
         localStorage.setItem("isLogin", false)
         localStorage.setItem("permission", 0)
+        localStorage.removeItem("id")
         this.setState({
             isLogin: false
         })
